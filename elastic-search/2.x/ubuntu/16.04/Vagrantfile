@@ -1,0 +1,53 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # All Vagrant configuration is done here. The most common configuration
+  # options are documented and commented below. For a complete reference,
+  # please see the online documentation at vagrantup.com.
+
+  Vagrant.require_version ">= 1.4.3"
+
+  # Every Vagrant virtual environment requires a box to build off of.
+  config.vm.box = "ubuntu/xenial64"
+
+  # Determine the wich values to use to configure the image.
+  if ENV['SERVER_VB_MEM']
+    memory = ENV["SERVER_VB_MEM"]
+  else
+    memory = 2048
+  end
+
+  if ENV['SERVER_VB_CPUS']
+    cpus = ENV["SERVER_VB_CPUS"]
+  else
+    cpus = 2
+  end
+
+  if ENV['SERVER_VB_IP']
+    ip = ENV["SERVER_VB_IP"]
+  else
+    ip = "192.168.0.13"
+  end
+
+  # More Info See: http://docs.vagrantup.com/v2/vagrantfile/machine_settings.html
+  config.vm.provider :virtualbox do |vb|
+   vb.name = "Elasticsearch-[ubuntu-16.04]"
+   vb.memory = memory
+   vb.cpus = cpus
+   vb.customize ["modifyvm", :id, "--groups", "/Vagrant"]
+   vb.gui = false
+  end
+
+  # Configure Hostname and Network
+  config.vm.hostname = "elastic-search.es.dev"
+  config.vm.network "public_network", ip: ip
+
+  # Install the base packages.
+  config.vm.provision 'shell', path: './provisioning/bootstrap.sh'
+  # Install and configure Elasticsearch
+  config.vm.provision 'shell', path: './provisioning/elasticsearch.sh'
+  
+end
