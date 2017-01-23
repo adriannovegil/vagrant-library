@@ -1,0 +1,5 @@
+# VM configuration
+32bit: false
+memory: "4096"
+cpus: "2"
+ip: "10.0.3.10"
