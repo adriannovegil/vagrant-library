@@ -1,0 +1,5 @@
+# Ignore the vagrant folder.
+.vagrant/
+
+# Ignore the virtual machine log file.
+*.log

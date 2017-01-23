@@ -1,0 +1,9 @@
+# VM configuration
+32bit: false
+memory: "2048"
+cpus: "2"
+ip: "10.0.3.20"
+
+# Elasticsearch access configuration
+elastic-ip: "9200"
+elastic-port: "10.0.3.10"
