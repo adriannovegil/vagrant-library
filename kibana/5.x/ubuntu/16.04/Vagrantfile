@@ -39,5 +39,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision 'shell', path: './provisioning/bootstrap.sh'
   # Install and configure Kibana
   config.vm.provision 'shell', path: './provisioning/kibana.sh'
+  # Install and configure Nginx
+  config.vm.provision 'shell', path: './provisioning/nginx.sh'
 
 end
