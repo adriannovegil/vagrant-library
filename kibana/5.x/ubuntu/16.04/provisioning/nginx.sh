@@ -8,6 +8,7 @@ echo "Provisioning Nginx"
 sudo apt-get -y install nginx apache2-utils
 
 # Add the user to the Kibana Dashboard
+# http://devopspy.com/devops/install-elk-stack-centos-7-logs-analytics/
 sudo htpasswd -bc /etc/nginx/htpasswd.users kibanaadmin kibanaadmin
 
 # Config the site.

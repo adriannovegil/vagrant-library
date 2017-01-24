@@ -2,7 +2,7 @@
 
 set -o errexit
 
-echo "Provisioning Kibana"
+echo "Provisioning Logstash"
 
 # Install Elasticsearch
 wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
@@ -15,4 +15,4 @@ sudo systemctl daemon-reload
 sudo systemctl enable logstash
 sudo systemctl start logstash.service
 
-echo "Kibana Successfully Provisioned"
+echo "Logstash Successfully Provisioned"
