@@ -37,5 +37,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Install the base packages.
   config.vm.provision 'shell', path: './provisioning/bootstrap.sh'
+  # Install and configure File Beats.
+  config.vm.provision 'shell', path: './provisioning/filebeat.sh'
+  # Install and configure Top Beats.
+  config.vm.provision 'shell', path: './provisioning/topbeat.sh'
 
 end
