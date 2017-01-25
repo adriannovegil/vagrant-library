@@ -20,4 +20,45 @@ sudo systemctl daemon-reload
 sudo systemctl enable kibana
 sudo systemctl start kibana
 
+# ------------------------------------------------------------------------------
+# End of first part
+# Load Kibana Dashboards
+# ------------------------------------------------------------------------------
+
+# Elastic provides several sample Kibana dashboards and Beats index patterns
+# that can help you get started with Kibana. Although we won't use the
+# dashboards in this tutorial, we'll load them anyway so we can use the Filebeat
+# index pattern that it includes.
+sudo curl -L -O https://download.elastic.co/beats/dashboards/beats-dashboards-1.3.1.zip
+
+# Install the unzip package with this command.
+sudo apt-get -y install unzip
+
+# Extract the contents of the archive.
+unzip beats-dashboards-*.zip
+
+# And load the sample dashboards, visualizations and Beats index patterns into
+# Elasticsearch with these commands.
+pushd ./beats-dashboards-1.3.1
+./load.sh -url "http://10.0.3.10:9200"
+popd
+
+# These are the index patterns that we just loaded:
+#   - packetbeat-*
+#   - topbeat-*
+#   - filebeat-*
+#   - winlogbeat-*
+# When we start using Kibana, we will select the Filebeat index pattern as our default.
+
+# ------------------------------------------------------------------------------
+# End of second part
+# Load Filebeat Index Template in Elasticsearch
+# ------------------------------------------------------------------------------
+
+# Download the Filebeat index template to your home directory:
+curl -O https://gist.githubusercontent.com/thisismitch/3429023e8438cc25b86c/raw/d8c479e2a1adcea8b1fe86570e42abab0f10f364/filebeat-index-template.json
+
+# Load the template with this command:
+curl -XPUT 'http://10.0.3.10:9200/_template/filebeat?pretty' -d@filebeat-index-template.json
+
 echo "Kibana Successfully Provisioned"
