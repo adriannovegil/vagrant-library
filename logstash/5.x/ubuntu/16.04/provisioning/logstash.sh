@@ -48,9 +48,9 @@ sudo cat > /etc/logstash/conf.d/02-beats-input.conf <<'EOF'
 input {
   beats {
     port => 5044
-    ssl => true
-    ssl_certificate => "/etc/pki/tls/certs/logstash-forwarder.crt"
-    ssl_key => "/etc/pki/tls/private/logstash-forwarder.key"
+    #ssl => true
+    #ssl_certificate => "/etc/pki/tls/certs/logstash-forwarder.crt"
+    #ssl_key => "/etc/pki/tls/private/logstash-forwarder.key"
   }
 }
 EOF
@@ -83,8 +83,8 @@ EOF
 sudo cat > /etc/logstash/conf.d/30-elasticsearch-output.conf <<'EOF'
 output {
   elasticsearch {
-    hosts => ["localhost:9200"]
-    sniffing => true
+    hosts => ["10.0.3.10:9200"]
+    #sniffing => true
     manage_template => false
     index => "%{[@metadata][beat]}-%{+YYYY.MM.dd}"
     document_type => "%{[@metadata][type]}"

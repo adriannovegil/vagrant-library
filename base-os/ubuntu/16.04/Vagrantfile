@@ -31,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # Configure Hostname and Network
-  config.vm.hostname = "kibana.es.dev"
+  config.vm.hostname = "base.es.dev"
   #config.vm.network "public_network", ip: pref['ip']
   config.vm.network "private_network", ip: pref['ip']
 

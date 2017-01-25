@@ -56,7 +56,7 @@ popd
 # ------------------------------------------------------------------------------
 
 # Download the Filebeat index template to your home directory:
-curl -O https://gist.githubusercontent.com/thisismitch/3429023e8438cc25b86c/raw/d8c479e2a1adcea8b1fe86570e42abab0f10f364/filebeat-index-template.json
+sudo curl -O https://gist.githubusercontent.com/thisismitch/3429023e8438cc25b86c/raw/d8c479e2a1adcea8b1fe86570e42abab0f10f364/filebeat-index-template.json
 
 # Load the template with this command:
 curl -XPUT 'http://10.0.3.10:9200/_template/filebeat?pretty' -d@filebeat-index-template.json
